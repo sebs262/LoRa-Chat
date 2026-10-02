@@ -113,12 +113,25 @@ async function send() {
     await write(fLen(1, pkt));                                         // ToRadio.packet
     addMsg(t, true, to === BC ? 'Todos' : name(to), to !== BC);
     $('txt').value = '';
+<<<<<<< HEAD
+=======
+    updateCount();
+    $('txt').focus();
+>>>>>>> 2116c3b (Version inicial)
   } catch (e) { setStatus('Error al enviar: ' + e.message); }
 }
 
 // ---------- Conexión ----------
 const setStatus = s => $('status').textContent = s;
+<<<<<<< HEAD
 const enable = on => { $('txt').disabled = $('btnSend').disabled = !on; if (on) $('txt').focus(); };
+=======
+const enable = on => {
+  $('txt').disabled = $('btnSend').disabled = !on;
+  document.body.classList.toggle('online', on);
+  if (on) $('txt').focus();
+};
+>>>>>>> 2116c3b (Version inicial)
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let linking = false;
@@ -179,6 +192,34 @@ function onDisc() {
 
 $('btnConn').onclick = () => dev?.gatt?.connected ? dev.gatt.disconnect() : connect();
 $('btnSend').onclick = send;
+<<<<<<< HEAD
 $('txt').onkeydown = e => e.key === 'Enter' && send();
+=======
+$('txt').onkeydown = e => { if (e.key === 'Enter' && !e.isComposing) send(); };  // sin 'return false': eso bloqueaba el teclado
+$('dest').onchange = () => $('txt').focus();
+
+// Límite por BYTES (Meshtastic admite ~233 por mensaje; con tildes y emojis un caracter ocupa 2-4 bytes)
+const MAX = 200;
+function updateCount() {
+  const t = $('txt'), chars = [...t.value];
+  while (enc.encode(chars.join('')).length > MAX) chars.pop();
+  if (chars.join('') !== t.value) t.value = chars.join('');
+  const n = enc.encode(t.value).length;
+  $('count').textContent = n + '/' + MAX;
+  $('count').classList.toggle('full', n >= MAX - 20);
+}
+$('txt').oninput = updateCount;
+
+// Si escribes con el teclado de la PC en cualquier parte de la página, el texto va al cuadro de mensaje
+document.addEventListener('keydown', e => {
+  const t = $('txt');
+  if (t.disabled || document.activeElement === t) return;
+  if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
+  e.preventDefault();                                   // escribimos la letra nosotros, sin depender del foco
+  t.focus();
+  t.value += e.key;
+  updateCount();
+});
+>>>>>>> 2116c3b (Version inicial)
 
 if (!navigator.bluetooth) setStatus('Este navegador no soporta Web Bluetooth. Usa Chrome o Chromium.');
