@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LoRa Chat</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>LoRa Chat</h1>
+      <span id="status">Desconectado</span>
+    </div>
+    <button id="btnConn">Conectar</button>
+  </header>
+
+  <div class="dest">
+    <label for="dest">Para</label>
+    <select id="dest">
+      <option value="4294967295">Todos (canal)</option>
+    </select>
+  </div>
+
+  <main id="msgs">
+    <p class="empty">Conecta tu Heltec para empezar a chatear.</p>
+  </main>
+
+  <footer>
+    <input id="txt" placeholder="Mensaje" maxlength="200" autocomplete="off" disabled>
+    <button id="btnSend" disabled>Enviar</button>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
