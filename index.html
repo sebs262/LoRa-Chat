@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LoRa Chat</title>
+<meta name="theme-color" content="#08090c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%2308090c'/%3E%3Cpath d='M5 19a10 10 0 0 1 0-14M19 5a10 10 0 0 1 0 14M8.5 15.5a5 5 0 0 1 0-7M15.5 8.5a5 5 0 0 1 0 7' stroke='%23ffb020' stroke-width='1.8' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='12' cy='12' r='1.6' fill='%23ffb020'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 19a10 10 0 0 1 0-14M19 5a10 10 0 0 1 0 14M8.5 15.5a5 5 0 0 1 0-7M15.5 8.5a5 5 0 0 1 0 7"/>
+        <circle cx="12" cy="12" r="1.6"/>
+      </svg>
+      <div>
+        <h1>LoRa Chat</h1>
+        <span id="status">Desconectado</span>
+      </div>
+    </div>
+    <button id="btnConn">Conectar</button>
+  </header>
+
+  <div class="dest">
+    <label for="dest">Para</label>
+    <select id="dest">
+      <option value="4294967295">Todos (canal)</option>
+    </select>
+  </div>
+
+  <main id="msgs">
+    <div class="empty">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="6"/>
+        <circle class="r" cx="60" cy="60" r="22"/>
+        <circle class="r" cx="60" cy="60" r="40"/>
+        <circle class="r" cx="60" cy="60" r="58"/>
+      </svg>
+      <p>Conecta tu Heltec para empezar a chatear</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="field">
+      <input id="txt" placeholder="Escribe un mensaje" maxlength="200" autocomplete="off" disabled>
+      <span id="count">0/200</span>
+    </div>
+    <button id="btnSend" aria-label="Enviar" disabled>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+    </button>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
